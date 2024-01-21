@@ -228,7 +228,9 @@ export function tick(args: StaticArray<u8>): void {
   } else if (food[0] > 0 && random >= 99) {
     food[0] = food[0] - 1;
   } else if (food[0] > 0 && random >= 98) {
-    food[0] = food[0] + 1;
+    if (alive[0] < 10) {
+      alive[0] = alive[0] + 1;
+    }
   }
   const coords = Storage.get(stringToBytes(coordsTokenKey + tokenIdString));
   coords[0] = abs(unsafeRandom()) % 200 as u8;
