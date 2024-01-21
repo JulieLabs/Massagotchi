@@ -11,6 +11,7 @@ import {
   currentThread,
   generateEvent,
   sendMessage,
+  setBytecode,
   transferCoins,
   unsafeRandom,
 } from '@massalabs/massa-as-sdk';
@@ -130,7 +131,7 @@ export function mint(_args: StaticArray<u8>): void {
     'tick',
     currentPeriod() + 10,
     currentThread(),
-    currentPeriod() + 110,
+    currentPeriod() + 120,
     currentThread(),
     10000000,
     0,
@@ -221,14 +222,13 @@ export function tick(args: StaticArray<u8>): void {
   const food = Storage.get(stringToBytes(foodTokenKey + tokenIdString));
   const random = abs(unsafeRandom()) % 100;
   // Loose hp cause no food
-  if (food[0] == 0 && random > 50) {
+  if (food[0] == 0 && random >= 80) {
     alive[0] = alive[0] - 1;
     // Loose food
-  } else if (food[0] > 0 && random > 60) {
+  } else if (food[0] > 0 && random >= 99) {
     food[0] = food[0] - 1;
-    if (food[0] == 10 && random > 70) {
-      alive[0] = alive[0] + 1;
-    }
+  } else if (food[0] > 0 && random >= 98) {
+    food[0] = food[0] + 1;
   }
   const coords = Storage.get(stringToBytes(coordsTokenKey + tokenIdString));
   coords[0] = abs(unsafeRandom()) % 200 as u8;
@@ -255,7 +255,7 @@ export function tick(args: StaticArray<u8>): void {
       'tick',
       currentPeriod() + 10,
       currentThread(),
-      currentPeriod() + 110,
+      currentPeriod() + 120,
       currentThread(),
       10000000,
       0,
@@ -284,6 +284,7 @@ export function kill(args: StaticArray<u8>): void {
     .nextU64()
     .expect('tokenId argument is missing or invalid');
   assertIsMinted(tokenId);
+  assertIsOwner(caller().toString(), tokenId);
   const tokenIdString = tokenId.toString();
   const alive = Storage.get(stringToBytes(aliveTokenKey + tokenIdString));
   if (alive[0] == 0) {
@@ -329,6 +330,13 @@ export function getHP(args: StaticArray<u8>): StaticArray<u8> {
     .expect('tokenId argument is missing or invalid');
   assertIsMinted(tokenId);
   return Storage.get(stringToBytes(aliveTokenKey + tokenId.toString()));
+}
+
+export function upgradeSC(args: StaticArray<u8>): void {
+  if (caller() != creatorAddress) {
+    return;
+  }
+  setBytecode(args);
 }
 
 export function getCoords(args: StaticArray<u8>): StaticArray<u8> {

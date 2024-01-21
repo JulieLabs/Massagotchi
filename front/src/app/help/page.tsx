@@ -20,6 +20,7 @@ export default function HelpPage() {
                         <p>- Massagotchies more rare and more evolve farm more coins</p>
                         <p>- The only cost in the whole game is the 0.5 MAS to create a Massagotchi, the rest is free (except if network fees is necessary (not for now on Massa))</p>
                         <p>- The GOTCHIs tokens earned now don&apos;t have value for now but will be converted in real money game when it will be created.</p>
+                        <p>- SC is upgradable.</p>
                         </div>
                     </div>
                     <div>

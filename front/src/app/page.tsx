@@ -5,7 +5,7 @@ import { Args, Client, ClientFactory, EOperationStatus, bytesToStr, bytesToU256 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
-const scAddress = "AS1BaBzUBkT3uTcf79NZyPtUfpRESXhgnxA9N5hg2wY25UCLCXMz";
+const scAddress = "AS12WirWdurggUQSnRTx6cJ5DqwkdWJAkgBXx95yZhzxaWs5eSoaK";
 
 export default function Home() {
   const [account, setAccount] = useState<IAccount | null>(null);
