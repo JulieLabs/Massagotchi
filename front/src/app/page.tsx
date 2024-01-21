@@ -1,7 +1,7 @@
 "use client";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IAccount, IProvider, providers } from "@massalabs/wallet-provider";
-import { Args, Client, ClientFactory, EOperationStatus, bytesToStr, bytesToU256 } from "@massalabs/massa-web3";
+import { Args, Client, ClientFactory, DefaultProviderUrls, EOperationStatus, ProviderType, bytesToStr, bytesToU256 } from "@massalabs/massa-web3";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -72,7 +72,9 @@ export default function Home() {
     setAccount(accounts[0]);
     setAccounts(accounts);
 
-    setClient(await ClientFactory.fromWalletProvider(provider_, accounts[0]));
+    const client_ = await ClientFactory.fromWalletProvider(provider_, accounts[0]);
+    client_.setCustomProviders([{url: "https://mainnet.massa.net/api/v2", type: ProviderType.PUBLIC}]);
+    setClient(client_);
   }
   async function changeAccount(address: string) {
     if (!accounts || !provider) {
