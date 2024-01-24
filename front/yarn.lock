@@ -56,6 +56,11 @@
   resolved "https://registry.yarnpkg.com/@hicaru/bearby.js/-/bearby.js-0.5.1.tgz#bb433aa69692b7ff38adef8ed0b0c85063b65b3c"
   integrity sha512-vAVZjjtHsJfaKu3bwQSh0QAH82HTPyqlqlyO9guWpOSHujC+C3yrh59OA7M3ABrzzIskr6hB4VqVLmZeNqJjuQ==
 
+"@hicaru/bearby.js@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@hicaru/bearby.js/-/bearby.js-0.5.5.tgz#993028ea9521840fee934f2595feffbc027e1441"
+  integrity sha512-vee7GrVcfR7jfbNz7JnP42HG4OQORPxk+WnlQX62oYfp4iH5fUaSPuz38q3GlsxPwJNt6pg3oEfd8QKUGjWHdA==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.14.tgz#d78e481a039f7566ecc9660b4ea7fe6b1fec442b"
@@ -159,6 +164,26 @@
     uid "^2.0.1"
     "@hicaru/bearby.js" "^0.5.0"
     "@massalabs/web3-utils" "^1.4.1"
+    axios "^0.26.1"
+    bignumber.js "^9.1.1"
+    bs58check "^3.0.1"
+    buffer "^6.0.3"
+    npm-run-all "^4.1.5"
+    rimraf "^5.0.5"
+    varint "^6.0.0"
+  optionalDependencies:
+    bufferutil "^4.0.7"
+    utf-8-validate "^6.0.2"
+
+"@massalabs/wallet-provider@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@massalabs/wallet-provider/-/wallet-provider-1.5.2.tgz#3e0566c574040ededa2b7822bcc50c3626af411f"
+  integrity sha512-PG7YAZQ3BExYiTYJH3RzvD0FY/e3wLG/ScGIh5jcxDh/NwwMaQKg8zhS7vhDd62z8Ezs8gohRAodSQbnR+9HHw==
+  dependencies:
+    uid "^2.0.1"
+    "@hicaru/bearby.js" "^0.5.5"
+    "@massalabs/massa-web3" "^3.0.2"
+    "@massalabs/web3-utils" "^1.4.7"
     axios "^0.26.1"
     bignumber.js "^9.1.1"
     bs58check "^3.0.1"

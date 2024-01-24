@@ -1,7 +1,7 @@
 "use client";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IAccount, IProvider, providers } from "@massalabs/wallet-provider";
-import { Args, Client, ClientFactory, DefaultProviderUrls, EOperationStatus, ProviderType, bytesToStr, bytesToU256 } from "@massalabs/massa-web3";
+import { Args, Client, ClientFactory, DefaultProviderUrls, EOperationStatus, ProviderType, bytesToStr, bytesToU256, strToBytes } from "@massalabs/massa-web3";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -549,18 +549,17 @@ function MassagotchisView({ account, client, nbCollectibles, latestOpId, setCurr
       const res = new Args(result.returnValue);
       const total = res.nextU64();
       const collectibles: Collectible[] = [];
+      const prefix = "ownerOf_"
+      const keys = [];
       for (let i = 1; i <= total; i++) {
-        if (collectibles.length >= nbCollectibles) {
-          break;
-        }
-        let result = await client.smartContracts().readSmartContract({
-          maxGas: BigInt(4000000),
-          targetAddress: scAddress,
-          targetFunction: "nft1_ownerOf",
-          parameter: new Args().addU64(BigInt(i)),
-        });
-        const owner = bytesToStr(result.returnValue);
-        if (owner != account.address()) {
+        const key = strToBytes(prefix + i.toString());
+        keys.push({address: scAddress, key: key});
+      }
+      const resTokens = await client.publicApi().getDatastoreEntries(keys);
+      console.log(resTokens);
+      for (let i = 1; i <= total; i++) {
+        const stringAddress = bytesToStr(resTokens[i - 1].candidate_value!);
+        if (stringAddress !== account.address()) {
           continue;
         }
         let infos = await client.smartContracts().readSmartContract({

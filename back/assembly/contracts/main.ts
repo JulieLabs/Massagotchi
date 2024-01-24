@@ -220,14 +220,14 @@ export function tick(args: StaticArray<u8>): void {
     return;
   }
   const food = Storage.get(stringToBytes(foodTokenKey + tokenIdString));
-  const random = abs(unsafeRandom()) % 100;
+  const random = abs(unsafeRandom()) % 200;
   // Loose hp cause no food
-  if (food[0] == 0 && random >= 80) {
+  if (food[0] == 0 && random >= 160) {
     alive[0] = alive[0] - 1;
     // Loose food
-  } else if (food[0] > 0 && random >= 99) {
+  } else if (food[0] > 0 && random >= 199) {
     food[0] = food[0] - 1;
-  } else if (food[0] > 0 && random >= 98) {
+  } else if (food[0] > 0 && random >= 198) {
     if (alive[0] < 10) {
       alive[0] = alive[0] + 1;
     }
