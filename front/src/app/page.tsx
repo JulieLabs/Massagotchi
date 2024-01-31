@@ -81,7 +81,9 @@ export default function Home() {
       return;
     }
     setAccount(accounts.find(a => a.address() == address)!);
-    setClient(await ClientFactory.fromWalletProvider(provider, accounts.find(a => a.address() == address)!));
+    const client_ = await ClientFactory.fromWalletProvider(provider, accounts.find(a => a.address() == address)!);
+    client_.setCustomProviders([{url: "https://massagotchi.com/api", type: ProviderType.PUBLIC}]);
+    setClient(client_);
   }
   async function callMint() {
     if (!client) {
