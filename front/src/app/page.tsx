@@ -73,7 +73,7 @@ export default function Home() {
     setAccounts(accounts);
 
     const client_ = await ClientFactory.fromWalletProvider(provider_, accounts[0]);
-    client_.setCustomProviders([{url: "https://mainnet.massa.net/api/v2", type: ProviderType.PUBLIC}]);
+    client_.setCustomProviders([{url: "https://massagotchi.com/api", type: ProviderType.PUBLIC}]);
     setClient(client_);
   }
   async function changeAccount(address: string) {
